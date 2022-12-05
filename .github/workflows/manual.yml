@@ -11,11 +11,11 @@ jobs:
       matrix:
         platform:
         - name: Windows
-          file: Abduction.exe
+          file: AOTM.exe
         - name: MacOS
-          file: Abduction.zip
+          file: AOTM.zip
         - name: Linux
-          file: Abduction.x86_64
+          file: AOTM.x86_64
     steps:
       - name: Checkout
         uses: actions/checkout@v2
