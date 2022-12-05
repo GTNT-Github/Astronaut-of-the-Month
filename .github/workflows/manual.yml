@@ -1,0 +1,35 @@
+name: Build Godot
+
+on:
+  push: {}
+  pull_request: {}
+
+jobs:
+  Godot:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        platform:
+        - name: Windows
+          file: Abduction.exe
+        - name: MacOS
+          file: Abduction.zip
+        - name: Linux
+          file: Abduction.x86_64
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+        with: 
+          lfs: true
+      - name: Build
+        id: build
+        uses: manleydev/build-godot-action@v1.4.1
+        with:
+          name: ${{ matrix.platform.file }}
+          preset: ${{ matrix.platform.name }}
+          debugMode: "true"
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v2
+        with:
+          name: Game - ${{ matrix.platform.name }}
+          path: ${{ github.workspace }}/${{ steps.build.outputs.build }}
