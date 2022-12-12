@@ -12,8 +12,6 @@ jobs:
         platform:
         - name: Windows
           file: AOTM.exe
-        - name: MacOS
-          file: AOTM.zip
         - name: Linux
           file: AOTM.x86_64
     steps:
