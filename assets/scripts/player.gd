@@ -1,28 +1,29 @@
-extends KinematicBody2D
-export var speed = 250
+extends CharacterBody2D
+@export var speed = 250
 var faceLeft: bool = true
 
 
 func _process(_delta: float) -> void:
 	var velocity: Vector2 = getInput()
-	move_and_slide(velocity*speed)
-
+	set_velocity(velocity*speed)
+	move_and_slide()
+	$/root/Game/UI/FPS.text = str("FPS: ",Engine.get_frames_per_second())
 func getInput() -> Vector2:
-	var animatedSprite = $Sprite
+	var animatedSprite = $Sprite2D
 	var velocity: Vector2 = Vector2.ZERO
 	var animation: String = "idle"
 	
-	if Input.is_action_pressed("ui_up"):
+	if Input.is_action_pressed("up"):
 		velocity.y -= 1
 		animation = "walk"
-	if Input.is_action_pressed("ui_down"):
+	if Input.is_action_pressed("down"):
 		velocity.y += 1
 		animation = "walk"
-	if Input.is_action_pressed("ui_right"):
+	if Input.is_action_pressed("right"):
 		velocity.x += 1
 		animation = "walk"
 		faceLeft = false
-	if Input.is_action_pressed("ui_left"):
+	if Input.is_action_pressed("left"):
 		velocity.x -= 1
 		animation = "walk"
 		faceLeft = true
