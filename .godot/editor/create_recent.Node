@@ -1,3 +1,7 @@
+MultiplayerSynchronizer
+MultiplayerSpawner
+Node2D
+Label
+Button
 CollisionShape2D
 CanvasLayer
-Label

@@ -1,15 +1,21 @@
 extends CharacterBody2D
 @export var speed = 250
 var faceLeft: bool = true
+@onready var syncronizer = $MultiplayerSynchronizer
 
-
+func _ready():
+	syncronizer.set_multiplayer_authority(str(name).to_int())
+	$Camera2D.current = syncronizer.is_multiplayer_authority()
+	
 func _process(_delta: float) -> void:
-	var velocity: Vector2 = getInput()
-	set_velocity(velocity*speed)
-	move_and_slide()
+	if syncronizer.is_multiplayer_authority():
+		var velocity: Vector2 = getInput()
+		set_velocity(velocity*speed)
+		move_and_slide()
+		syncronizer.position = position
 	$/root/Game/UI/FPS.text = str("FPS: ",Engine.get_frames_per_second())
 func getInput() -> Vector2:
-	var animatedSprite = $Sprite2D
+	var animatedSprite = $Sprite
 	var velocity: Vector2 = Vector2.ZERO
 	var animation: String = "idle"
 	
