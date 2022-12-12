@@ -1,14 +1,19 @@
 name: Build Godot
 
 on:
-  push:
-    tags:
-      - "v*-test"
+  push: {}
+  pull_request: {}
 
 jobs:
-  export_game:
+  Godot:
     runs-on: ubuntu-latest
-    name: Export Game Job
+    strategy:
+      matrix:
+        platform:
+        - name: Windows
+          file: AOTM.exe
+        - name: Linux
+          file: AOTM.x86_64
     steps:
       - name: checkout
         uses: actions/checkout@v3.0.2
