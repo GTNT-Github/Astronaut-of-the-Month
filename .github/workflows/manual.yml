@@ -6,15 +6,9 @@ on:
       - "v*-test"
 
 jobs:
-  Godot:
+  export_game:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        platform:
-        - name: Windows
-          file: AOTM.exe
-        - name: Linux
-          file: AOTM.x86_64
+    name: Export Game Job
     steps:
       - name: checkout
         uses: actions/checkout@v3.0.2
