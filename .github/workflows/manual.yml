@@ -8,12 +8,6 @@ jobs:
   Godot:
     runs-on: ubuntu-latest
     strategy:
-      matrix:
-        platform:
-        - name: Windows
-          file: AOTM.exe
-        - name: Linux
-          file: AOTM.x86_64
     steps:
       - name: checkout
         uses: actions/checkout@v3.0.2
@@ -37,8 +31,23 @@ jobs:
             archive_output: true
             wine_path: ${{ steps.wine_install.outputs.WINE_PATH }}
             use_godot_4: true
-      - name: Upload Artifact
+      - name: Upload Windows
         uses: actions/upload-artifact@v2
         with:
-          name: Game - ${{ matrix.platform.name }}
-          path: ${{ steps.export.outputs.archive_directory }}
+          name: AOTM - Windows
+          path: ${{ steps.export.outputs.archive_directory }}/AOTM.exe
+      - name: Upload Mac
+        uses: actions/upload-artifact@v2
+        with:
+          name: AOTM - MacOS
+          path: ${{ steps.export.outputs.archive_directory }}/AOTM.x86_64
+      - name: Upload Linux
+        uses: actions/upload-artifact@v2
+        with:
+          name: AOTM - Linux
+          path: ${{ steps.export.outputs.archive_directory }}/AOTM.zip
+      - name: Upload Web
+        uses: actions/upload-artifact@v2
+        with:
+          name: AOTM - Web
+          path: ${{ steps.export.outputs.archive_directory }}/AOTM.html
