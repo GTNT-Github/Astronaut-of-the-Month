@@ -8,18 +8,14 @@ jobs:
   Godot:
     runs-on: ubuntu-latest
     steps:
-      - name: checkout
+      - name: Checkout
         uses: actions/checkout@v3.0.2
-      - name: get tag from version
-        id: tag_version
-        run: |
-          echo "TAG_VERSION=${GITHUB_REF#refs/tags/v}" >> $GITHUB_OUTPUT
-      - name: install wine
+      - name: Wine Installation
         id: wine_install
         run: |
           sudo apt install wine64
           echo "WINE_PATH=$(which wine64)" >> $GITHUB_OUTPUT
-      - name: export game
+      - name: Build Game
         id: export
         uses: firebelley/godot-export@master
         with:
@@ -34,19 +30,4 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: AOTM - Windows
-          path: ${{ steps.export.outputs.archive_directory }}/AOTM.exe
-      - name: Upload Mac
-        uses: actions/upload-artifact@v2
-        with:
-          name: AOTM - MacOS
-          path: ${{ steps.export.outputs.archive_directory }}/AOTM.x86_64
-      - name: Upload Linux
-        uses: actions/upload-artifact@v2
-        with:
-          name: AOTM - Linux
-          path: ${{ steps.export.outputs.archive_directory }}/AOTM.zip
-      - name: Upload Web
-        uses: actions/upload-artifact@v2
-        with:
-          name: AOTM - Web
-          path: ${{ steps.export.outputs.archive_directory }}/AOTM.html
+          path: ${{ steps.export.outputs.archive_directory }}/*
