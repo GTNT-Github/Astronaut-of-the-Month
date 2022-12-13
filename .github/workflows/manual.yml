@@ -15,7 +15,7 @@ jobs:
         run: |
           sudo apt install wine64
           echo "WINE_PATH=$(which wine64)" >> $GITHUB_OUTPUT
-      - name: Build Game
+      - name: Build
         id: export
         uses: firebelley/godot-export@master
         with:
@@ -30,4 +30,19 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: AOTM - Windows
-          path: ${{ steps.export.outputs.archive_directory }}
+          path: ${{ steps.export.outputs.archive_directory }}/Windows.zip
+      - name: Upload Mac
+        uses: actions/upload-artifact@v2
+        with:
+          name: AOTM - MacOS
+          path: ${{ steps.export.outputs.archive_directory }}/Linux.zip
+      - name: Upload Linux
+        uses: actions/upload-artifact@v2
+        with:
+          name: AOTM - Linux
+          path: ${{ steps.export.outputs.archive_directory }}/macOS.zip
+      - name: Upload Web
+        uses: actions/upload-artifact@v2
+        with:
+          name: AOTM - Web
+          path: ${{ steps.export.outputs.archive_directory }}/Web.zip
