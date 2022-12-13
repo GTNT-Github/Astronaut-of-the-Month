@@ -6,7 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://bpio056o2bgw6" path="res://assets/images/playerWalk2.png" id="4_turcq"]
 [ext_resource type="Script" path="res://assets/scripts/synchronizer.gd" id="5_23ryk"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_rfodv"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_7cmg1"]
 animations = [{
 "frames": [ExtResource("2_c01uo")],
 "loop": true,
@@ -19,13 +19,13 @@ animations = [{
 "speed": 4.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_galwq"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_h5s3b"]
 size = Vector2(46, 3.5)
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_h68wi"]
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_l5jgp"]
 size = Vector2(44.1, 48)
 
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_0syeh"]
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_rcita"]
 properties/0/path = NodePath(".:position")
 properties/0/spawn = true
 properties/0/sync = true
@@ -39,18 +39,18 @@ script = ExtResource("1_45a31")
 [node name="Sprite" type="AnimatedSprite2D" parent="."]
 texture_filter = 1
 scale = Vector2(0.5, 0.5)
-frames = SubResource("SpriteFrames_rfodv")
+frames = SubResource("SpriteFrames_7cmg1")
 animation = &"idle"
 
 [node name="Collision" type="CollisionShape2D" parent="."]
 position = Vector2(0, 22.5)
-shape = SubResource("RectangleShape2D_galwq")
+shape = SubResource("RectangleShape2D_h5s3b")
 
 [node name="Top" type="Area2D" parent="."]
 collision_mask = 0
 
 [node name="Collision" type="CollisionShape2D" parent="Top"]
-shape = SubResource("RectangleShape2D_h68wi")
+shape = SubResource("RectangleShape2D_l5jgp")
 
 [node name="Camera2D" type="Camera2D" parent="."]
 visible = false
@@ -61,5 +61,5 @@ rotation_smoothing_enabled = true
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 root_path = NodePath(".")
-replication_config = SubResource("SceneReplicationConfig_0syeh")
+replication_config = SubResource("SceneReplicationConfig_rcita")
 script = ExtResource("5_23ryk")

@@ -1,2 +1,4 @@
-res://assets/scenes/Game.tscn
 res://assets/scenes/Player.tscn
+res://assets/scripts/player.gd
+res://assets/scenes/Game.tscn
+res://assets/scripts/server.gd

@@ -4,6 +4,7 @@ var faceLeft: bool = true
 @onready var syncronizer = $MultiplayerSynchronizer
 
 func _ready():
+	print("IP:", IP.get_local_addresses()[3])
 	syncronizer.set_multiplayer_authority(str(name).to_int())
 	$Camera2D.current = syncronizer.is_multiplayer_authority()
 	
