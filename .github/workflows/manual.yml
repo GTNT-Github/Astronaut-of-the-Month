@@ -46,3 +46,10 @@ jobs:
         with:
           name: AOTM - Web
           path: ${{ steps.export.outputs.archive_directory }}/Web.zip
+      - name: Upzip Web
+        run: |
+          unzip ${{ steps.export.outputs.archive_directory }}/Web.zip -d ${{ steps.export.outputs.archive_directory }}/WebExtracted
+      - name: Deploy to Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: ${{ steps.export.outputs.archive_directory }}/WebExtracted
