@@ -24,32 +24,26 @@ jobs:
             relative_project_path: ./Client
             relative_export_path: ./my/build/destination # move export output to this directory relative to git root
             archive_output: true
+            export_debug: true
             wine_path: ${{ steps.wine_install.outputs.WINE_PATH }}
             use_godot_4: false
       - name: Upload Windows
         uses: actions/upload-artifact@v2
         with:
           name: AOTM Client - Windows
-          path: ${{ steps.export.outputs.archive_directory }}/Windows.zip
+          path: ${{ steps.export.outputs.archive_directory }}/Client_Windows.zip
       - name: Upload Mac
         uses: actions/upload-artifact@v2
         with:
           name: AOTM Client - MacOS
-          path: ${{ steps.export.outputs.archive_directory }}/Linux.zip
+          path: ${{ steps.export.outputs.archive_directory }}/Client_Linux.zip
       - name: Upload Linux
         uses: actions/upload-artifact@v2
         with:
           name: AOTM Client - Linux
-          path: ${{ steps.export.outputs.archive_directory }}/macOS.zip
+          path: ${{ steps.export.outputs.archive_directory }}/Client_MacOS.zip
       - name: Upload Web
         uses: actions/upload-artifact@v2
         with:
           name: AOTM Client - Web
-          path: ${{ steps.export.outputs.archive_directory }}/Web.zip
-      - name: Upzip Web
-        run: |
-          unzip ${{ steps.export.outputs.archive_directory }}/Web.zip -d ${{ steps.export.outputs.archive_directory }}/WebExtracted
-      - name: Deploy to Pages
-        uses: JamesIves/github-pages-deploy-action@v4
-        with:
-          folder: ${{ steps.export.outputs.archive_directory }}/WebExtracted
+          path: ${{ steps.export.outputs.archive_directory }}/Client_Web.zip
