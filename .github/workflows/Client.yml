@@ -29,22 +29,22 @@ jobs:
       - name: Upload Windows
         uses: actions/upload-artifact@v2
         with:
-          name: AOTM - Windows
+          name: AOTM Client - Windows
           path: ${{ steps.export.outputs.archive_directory }}/Windows.zip
       - name: Upload Mac
         uses: actions/upload-artifact@v2
         with:
-          name: AOTM - MacOS
+          name: AOTM Client - MacOS
           path: ${{ steps.export.outputs.archive_directory }}/Linux.zip
       - name: Upload Linux
         uses: actions/upload-artifact@v2
         with:
-          name: AOTM - Linux
+          name: AOTM Client - Linux
           path: ${{ steps.export.outputs.archive_directory }}/macOS.zip
       - name: Upload Web
         uses: actions/upload-artifact@v2
         with:
-          name: AOTM - Web
+          name: AOTM Client - Web
           path: ${{ steps.export.outputs.archive_directory }}/Web.zip
       - name: Upzip Web
         run: |
