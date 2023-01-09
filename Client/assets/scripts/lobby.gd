@@ -25,4 +25,5 @@ func show_waiting_room():
 	waiting_room.popup_centered()
 
 func _on_ReadyBtn_pressed():
+	Server.load_game()
 	ready_button.disabled = true
