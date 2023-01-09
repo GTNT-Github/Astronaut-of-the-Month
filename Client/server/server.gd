@@ -31,7 +31,7 @@ func _player_disconnected(id):
 func _connected_ok():
 	print("Successfully connected to server")
 	register_player()
-	rpc_id(1, "send_player_info", local_player_id)
+	rpc_id(1, "send_player_info", local_player_id, player_data)
 	
 func _connected_fail():
 	print("Failed to connect")
