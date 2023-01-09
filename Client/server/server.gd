@@ -38,11 +38,11 @@ func _connected_fail():
 	
 func _server_disconnected():
 	print("Server Disconnected")
-
+	
 func register_player():
 	local_player_id = get_tree().get_network_unique_id()
 	player_data = Save.save_data
 	players[local_player_id] = player_data
-
+	
 sync func update_waiting_room():
-	pass
+	get_tree().call_group("WaitingRoom", "refresh_players", players)
