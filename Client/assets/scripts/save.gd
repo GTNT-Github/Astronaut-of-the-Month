@@ -7,6 +7,7 @@ var save_data = {}
 func _ready():
 	save_data = get_data()
 	
+	
 func get_data():
 	var file = File.new()
 	
@@ -19,6 +20,7 @@ func get_data():
 	save_data = data
 	file.close()
 	return(data)
+	
 	
 func save_game():
 	var save_game = File.new()
