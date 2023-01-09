@@ -11,10 +11,10 @@ script = ExtResource( 1 )
 margin_right = 40.0
 margin_bottom = 40.0
 
-[node name="JoinButton" type="Button" parent="CenterContainer"]
+[node name="JoinBtn" type="Button" parent="CenterContainer"]
 margin_top = 10.0
 margin_right = 77.0
 margin_bottom = 30.0
 text = "Join Game"
 
-[connection signal="pressed" from="CenterContainer/JoinButton" to="." method="_on_JoinButton_pressed"]
+[connection signal="pressed" from="CenterContainer/JoinBtn" to="." method="_on_JoinBtn_pressed"]
