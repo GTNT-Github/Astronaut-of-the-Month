@@ -33,5 +33,5 @@ remote func load_world():
 	ready_players += 1
 	if players.size() > 1 and ready_players >= players.size():
 		rpc("start_game")
-		var world = preload("res://assets/scenes/World.tscn").instance()
+		var world = preload("res://assets/scenes/world.tscn").instance()
 		get_tree().get_root().add_child(world)

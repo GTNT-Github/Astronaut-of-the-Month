@@ -51,6 +51,6 @@ func load_game():
 	rpc_id(1, "load_world")
 	
 sync func start_game():
-	var world = preload("res://assets/scenes/World.tscn").instance()
+	var world = preload("res://assets/scenes/world.tscn").instance()
 	get_tree().get_root().add_child(world)
 	get_tree().get_root().get_node("Lobby").queue_free()
