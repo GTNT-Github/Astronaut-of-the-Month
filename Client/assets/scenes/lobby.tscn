@@ -2,154 +2,59 @@
 
 [ext_resource path="res://assets/scripts/lobby.gd" type="Script" id=1]
 [ext_resource path="res://assets/scenes/waitingRoom.tscn" type="PackedScene" id=2]
-[ext_resource path="res://assets/fonts/defaultFont.ttf" type="DynamicFontData" id=3]
+[ext_resource path="res://assets/scenes/titleScreen.tscn" type="PackedScene" id=4]
 
-[sub_resource type="DynamicFont" id=1]
-size = 50
-outline_color = Color( 0, 0, 0, 1 )
-use_filter = true
-font_data = ExtResource( 3 )
+[sub_resource type="CanvasItemMaterial" id=6]
+blend_mode = 1
 
-[sub_resource type="DynamicFont" id=3]
-font_data = ExtResource( 3 )
+[sub_resource type="ParticlesMaterial" id=4]
+emission_shape = 2
+emission_box_extents = Vector3( 1, 400, 1 )
+flag_disable_z = true
+direction = Vector3( -1, 0, 0 )
+spread = 0.0
+gravity = Vector3( 0, 0, 0 )
+initial_velocity = 100.0
+initial_velocity_random = 0.5
+orbit_velocity = 0.0
+orbit_velocity_random = 0.0
+scale = 4.0
+scale_random = 0.5
 
 [node name="Lobby" type="Control"]
 anchor_right = 1.0
 anchor_bottom = 1.0
 script = ExtResource( 1 )
 
-[node name="ColorRect" type="ColorRect" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -320.0
-margin_top = -180.0
-margin_right = 320.0
-margin_bottom = 180.0
-color = Color( 0.0627451, 0.0627451, 0.0627451, 1 )
+[node name="Space" type="ColorRect" parent="."]
+margin_right = 1280.0
+margin_bottom = 720.0
+color = Color( 0, 0, 0, 1 )
 
-[node name="CenterContainer" type="CenterContainer" parent="."]
-anchor_right = 1.0
-anchor_bottom = 1.0
+[node name="Stars" type="Particles2D" parent="Space"]
+modulate = Color( 2, 2, 2, 1 )
+material = SubResource( 6 )
+position = Vector2( 1284, 360 )
+amount = 80
+lifetime = 40.0
+preprocess = 20.0
+speed_scale = 0.84
+visibility_rect = Rect2( -10, -360, 10, 720 )
+process_material = SubResource( 4 )
 
-[node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
-margin_left = 435.0
-margin_top = 216.0
-margin_right = 844.0
-margin_bottom = 504.0
-custom_constants/separation = 15
-
-[node name="Title" type="Label" parent="CenterContainer/VBoxContainer"]
-margin_right = 409.0
-margin_bottom = 50.0
-custom_fonts/font = SubResource( 1 )
-text = "Lobby"
-align = 1
-valign = 1
-
-[node name="GridContainer" type="GridContainer" parent="CenterContainer/VBoxContainer"]
-margin_top = 65.0
-margin_right = 409.0
-margin_bottom = 214.0
-custom_constants/vseparation = 15
-custom_constants/hseparation = 15
-columns = 2
-
-[node name="NameLabel" type="Label" parent="CenterContainer/VBoxContainer/GridContainer"]
-margin_top = 5.0
-margin_right = 144.0
-margin_bottom = 21.0
-custom_fonts/font = SubResource( 3 )
-text = "Name:"
-
-[node name="NameTextBox" type="LineEdit" parent="CenterContainer/VBoxContainer/GridContainer"]
-margin_left = 159.0
-margin_right = 409.0
-margin_bottom = 26.0
-rect_min_size = Vector2( 250, 0 )
-custom_fonts/font = SubResource( 3 )
-align = 1
-placeholder_text = "Name"
-
-[node name="IPLabel" type="Label" parent="CenterContainer/VBoxContainer/GridContainer"]
-margin_top = 46.0
-margin_right = 144.0
-margin_bottom = 62.0
-custom_fonts/font = SubResource( 3 )
-text = "IP:"
-
-[node name="IPTextBox" type="LineEdit" parent="CenterContainer/VBoxContainer/GridContainer"]
-margin_left = 159.0
-margin_top = 41.0
-margin_right = 409.0
-margin_bottom = 67.0
-rect_min_size = Vector2( 250, 0 )
-custom_fonts/font = SubResource( 3 )
-align = 1
-placeholder_text = "IP Address"
-
-[node name="PortLabel" type="Label" parent="CenterContainer/VBoxContainer/GridContainer"]
-margin_top = 87.0
-margin_right = 144.0
-margin_bottom = 103.0
-custom_fonts/font = SubResource( 3 )
-text = "Port:"
-
-[node name="PortTextBox" type="LineEdit" parent="CenterContainer/VBoxContainer/GridContainer"]
-margin_left = 159.0
-margin_top = 82.0
-margin_right = 409.0
-margin_bottom = 108.0
-rect_min_size = Vector2( 250, 0 )
-custom_fonts/font = SubResource( 3 )
-align = 1
-placeholder_text = "Port Number"
-
-[node name="LobbyLabel" type="Label" parent="CenterContainer/VBoxContainer/GridContainer"]
-margin_top = 128.0
-margin_right = 144.0
-margin_bottom = 144.0
-custom_fonts/font = SubResource( 3 )
-text = "Lobby ID:"
-
-[node name="LobbyTextBox" type="LineEdit" parent="CenterContainer/VBoxContainer/GridContainer"]
-margin_left = 159.0
-margin_top = 123.0
-margin_right = 409.0
-margin_bottom = 149.0
-rect_min_size = Vector2( 250, 0 )
-custom_fonts/font = SubResource( 3 )
-align = 1
-placeholder_text = " Lobby ID"
-
-[node name="createBtn" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 229.0
-margin_right = 409.0
-margin_bottom = 251.0
-custom_fonts/font = SubResource( 3 )
-text = "Create Game"
-
-[node name="JoinBtn" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 266.0
-margin_right = 409.0
-margin_bottom = 288.0
-custom_fonts/font = SubResource( 3 )
-text = "Join Game"
+[node name="TitleScreen" parent="." instance=ExtResource( 4 )]
 
 [node name="WaitingRoom" parent="." instance=ExtResource( 2 )]
 visible = false
 
 [node name="VBoxContainer" parent="WaitingRoom/CenterContainer" index="0"]
-margin_top = 303.0
-margin_bottom = 417.0
+margin_top = 172.0
+margin_bottom = 308.0
 
-[node name="ItemList" parent="WaitingRoom/CenterContainer/VBoxContainer" index="1"]
-items = [ "Player 1", null, false, "Player 2", null, false, "Player 3", null, false, "Player 4", null, false ]
+[connection signal="text_changed" from="TitleScreen/Name" to="." method="_on_NameTextBox_text_changed"]
+[connection signal="pressed" from="TitleScreen/CreateBtn" to="." method="_on_CreateBtn_pressed"]
+[connection signal="pressed" from="TitleScreen/JoinBtn/EnterArrow" to="." method="_on_JoinBtn_pressed"]
+[connection signal="pressed" from="WaitingRoom/CenterContainer/VBoxContainer/StartBtn" to="." method="_on_StartBtn_pressed"]
 
-[connection signal="text_changed" from="CenterContainer/VBoxContainer/GridContainer/NameTextBox" to="." method="_on_NameTextBox_text_changed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/createBtn" to="." method="_on_createBtn_pressed"]
-[connection signal="pressed" from="CenterContainer/VBoxContainer/JoinBtn" to="." method="_on_JoinBtn_pressed"]
-[connection signal="pressed" from="WaitingRoom/CenterContainer/VBoxContainer/ReadyBtn" to="." method="_on_ReadyBtn_pressed"]
-
+[editable path="TitleScreen"]
 [editable path="WaitingRoom"]

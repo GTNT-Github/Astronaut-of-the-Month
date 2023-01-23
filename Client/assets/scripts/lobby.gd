@@ -1,25 +1,19 @@
 extends Control
 
-onready var player_name = $CenterContainer/VBoxContainer/GridContainer/NameTextBox
-onready var selected_IP = $CenterContainer/VBoxContainer/GridContainer/IPTextBox
-onready var selected_port = $CenterContainer/VBoxContainer/GridContainer/PortTextBox
-onready var selected_lobby = $CenterContainer/VBoxContainer/GridContainer/LobbyTextBox
+onready var player_name = $TitleScreen/Name
+onready var selected_lobby = $TitleScreen/JoinBtn/LobbyLabel
+onready var lobby = $TitleScreen
 onready var waiting_room = $WaitingRoom
-onready var ready_button = $WaitingRoom/CenterContainer/VBoxContainer/ReadyBtn
 
 
-func _ready():
+func _ready() -> void:
 	player_name.text = Save.save_data["Player_name"]
-	selected_IP.text = Server.DEFAULT_IP
-	selected_port.text = str(Server.DEFAULT_PORT)
 
 
 func _on_JoinBtn_pressed():
 	Server.lobby_id = selected_lobby.text
-	Server.selected_IP = selected_IP.text
-	Server.selected_port = int(selected_port.text)
 	Server._connect_to_server()
-	show_waiting_room()
+	show_waiting_room(false)
 
 
 func _on_NameTextBox_text_changed(new_text):
@@ -27,21 +21,20 @@ func _on_NameTextBox_text_changed(new_text):
 	Save.save_game()
 
 
-func show_waiting_room():
-	waiting_room.popup_centered()
+func show_waiting_room(host):
+	lobby.visible = false
+	waiting_room.visible = true
+	$WaitingRoom/CenterContainer/VBoxContainer/StartBtn.visible = host
 
 
-func _on_ReadyBtn_pressed():
+func _on_StartBtn_pressed():
 	Server.load_game()
-	ready_button.disabled = true
 
 
-func _on_createBtn_pressed():
+func _on_CreateBtn_pressed():
 	Server.lobby_id = generate_id(6)
-	Server.selected_IP = selected_IP.text
-	Server.selected_port = int(selected_port.text)
 	Server._connect_to_server()
-	show_waiting_room()
+	show_waiting_room(true)
 
 
 func generate_id(length):
