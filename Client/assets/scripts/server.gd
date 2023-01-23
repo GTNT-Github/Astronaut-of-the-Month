@@ -8,6 +8,7 @@ var selected_IP
 var selected_port
 
 var local_player_id = 0
+var player_instances = {}
 sync var players = {}
 sync var player_data = {}
 sync var lobby_id = ""
@@ -20,7 +21,6 @@ func _connect_to_server():
 
 
 func _connected_ok():
-	print("Successfully connected to server")
 	register_player()
 	rpc_id(1, "send_player_info", lobby_id, local_player_id, player_data)
 
@@ -41,5 +41,6 @@ func load_game():
 
 sync func start_game(): 
 	var world = preload("res://assets/scenes/world.tscn").instance()
+	world.name = lobby_id
 	get_tree().get_root().add_child(world)
 	get_tree().get_root().get_node("Lobby").queue_free()

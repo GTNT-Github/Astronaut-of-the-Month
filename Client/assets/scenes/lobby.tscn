@@ -138,6 +138,7 @@ custom_fonts/font = SubResource( 3 )
 text = "Join Game"
 
 [node name="WaitingRoom" parent="." instance=ExtResource( 2 )]
+visible = false
 
 [node name="VBoxContainer" parent="WaitingRoom/CenterContainer" index="0"]
 margin_top = 303.0

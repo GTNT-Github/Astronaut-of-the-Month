@@ -9,7 +9,6 @@ onready var ready_button = $WaitingRoom/CenterContainer/VBoxContainer/ReadyBtn
 
 
 func _ready():
-	generate_id(6)
 	player_name.text = Save.save_data["Player_name"]
 	selected_IP.text = Server.DEFAULT_IP
 	selected_port.text = str(Server.DEFAULT_PORT)
@@ -39,8 +38,6 @@ func _on_ReadyBtn_pressed():
 
 func _on_createBtn_pressed():
 	Server.lobby_id = generate_id(6)
-	print("=-=-=-=-=-=")
-	print(69420, Server.lobby_id)
 	Server.selected_IP = selected_IP.text
 	Server.selected_port = int(selected_port.text)
 	Server._connect_to_server()
