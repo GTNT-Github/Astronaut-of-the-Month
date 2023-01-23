@@ -24,9 +24,9 @@ func _player_disconnected(player_id):
 
 	print(data[player_lobby]["players"].size())
 	if data[player_lobby]["players"].size() == 0:
+		if Server.data[player_lobby]["active_game"]:
+			get_node("/root/"+player_lobby).queue_free()
 		data.erase(player_lobby)
-		print(69420)
-		get_node("/root/"+player_lobby).queue_free()
 		return
 	
 	if Server.data[player_lobby]["active_game"]:
@@ -56,17 +56,27 @@ func update_player_list(lobby_id, id):
 		rpc_id(i,"update_waiting_room")
 
 
-remote func load_world(lobby_id):
-	#Update ready players
-	data[lobby_id]["ready_players"] += 1
+remote func load_world(lobby_id, id):
 	
 	#check if all players are ready
-	if data[lobby_id]["players"].size() > 1 and data[lobby_id]["ready_players"] >= data[lobby_id]["players"].size():
+	if data[lobby_id]["host"]==id:
 		
 		#Start client worlds
 		for i in data[lobby_id]["players"]:
-			rpc_id(i,"start_game")
+			rpc_id(i,"start_game", lobby_id)
 			
+#		var timer = Timer.new()
+#		timer.wait_time = 1
+#		timer.name = lobby_id+"Timer"
+#		add_child(timer)
+#		timer.start()
+#		for n in 3:
+#			yield(timer,"timeout")
+#			print(lobby_id+" stwarts in "+str(3-n)+" seconds!")
+#			print(n)
+#			if n == 2:
+#				timer.queue_free()
+		
 		#Start server world
 		var world = preload("res://assets/scenes/world.tscn").instance()
 		world.name = lobby_id
@@ -74,4 +84,5 @@ remote func load_world(lobby_id):
 
 
 func create_lobby(lobby_id,host_id):
-	data[lobby_id] = {"players":{},"ready_players":0,"host":host_id,"active_game":false}
+	print(lobby_id)
+	data[lobby_id] = {"players":{},"host":host_id,"active_game":false}
