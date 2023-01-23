@@ -7,7 +7,6 @@ var max_players = 4
 var data = {}
 var players = {}
 
-
 func _ready():
 	start_server()
 
@@ -20,13 +19,20 @@ func start_server():
 
 func _player_disconnected(player_id):
 	var player_lobby = players[player_id]
+	var player_name = data[player_lobby]["players"][player_id]["Player_name"]
 	data[player_lobby]["players"].erase(player_id)
 
+	print(data[player_lobby]["players"].size())
 	if data[player_lobby]["players"].size() == 0:
 		data.erase(player_lobby)
+		print(69420)
+		get_node("/root/"+player_lobby).queue_free()
 		return
-
-	update_player_list(player_lobby)
+	
+	if Server.data[player_lobby]["active_game"]:
+		get_node("/root/"+player_lobby).remove_player(player_lobby, player_id, player_name)
+	
+	update_player_list(player_lobby, player_id)
 
 
 remote func send_player_info(lobby_id, id, player_data):
@@ -37,10 +43,10 @@ remote func send_player_info(lobby_id, id, player_data):
 	data[lobby_id]["players"][id] = player_data
 	players[id] = lobby_id
 	
-	update_player_list(lobby_id)
+	update_player_list(lobby_id, id)
 
 
-func update_player_list(lobby_id):
+func update_player_list(lobby_id, id):
 	#Update client player list
 	for i in data[lobby_id]["players"]:
 		rset_id(i,"players", data[lobby_id]["players"])
@@ -63,8 +69,9 @@ remote func load_world(lobby_id):
 			
 		#Start server world
 		var world = preload("res://assets/scenes/world.tscn").instance()
+		world.name = lobby_id
 		get_tree().get_root().add_child(world)
 
 
 func create_lobby(lobby_id,host_id):
-	data[lobby_id] = {"players":{},"ready_players":0,"host":host_id}
+	data[lobby_id] = {"players":{},"ready_players":0,"host":host_id,"active_game":false}
