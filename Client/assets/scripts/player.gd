@@ -5,25 +5,25 @@ var faceLeft: bool = true
 onready var player_label = $Name
 onready var camera = $Camera
 
+
 func _ready() -> void:
-#	player_label.set_as_toplevel(true)
 	set_player_name()
 
+
 func _physics_process(_delta: float) -> void:
-	
 	if is_network_master():
 		camera.current = true
-#		player_label.rect_position = Vector2(position.x-495, position.y -60)
 		var velocity: Dictionary = getInput()
 		move_and_slide(velocity["velocity"]*speed)
 		
-		rpc_unreliable_id(1, "update_player", global_transform, velocity["animation"])
-		
+		rpc_unreliable_id(1, "update_player", Server.lobby_id, global_transform, velocity["animation"])
+
+
 remote func update_remote_player(transform,animation):
 	if not is_network_master():
 		global_transform = transform
 		$Sprite.play(animation)
-#		player_label.rect_position = Vector2(position.x-495,position.y-60)
+
 
 func getInput() -> Dictionary:
 	var animatedSprite = $Sprite
@@ -49,6 +49,7 @@ func getInput() -> Dictionary:
 		animatedSprite.play(animation)
 		animatedSprite.flip_h = faceLeft
 	return {"velocity": velocity,"animation":animation}
+
 
 func set_player_name():
 	player_label.text = Server.players[int(name)]["Player_name"]

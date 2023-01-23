@@ -25,9 +25,9 @@ anchor_bottom = 1.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="CenterContainer"]
 margin_left = 471.0
-margin_top = 277.0
+margin_top = 240.0
 margin_right = 809.0
-margin_bottom = 443.0
+margin_bottom = 480.0
 custom_constants/separation = 15
 
 [node name="Label" type="Label" parent="CenterContainer/VBoxContainer"]
@@ -40,7 +40,7 @@ valign = 1
 [node name="GridContainer" type="GridContainer" parent="CenterContainer/VBoxContainer"]
 margin_top = 29.0
 margin_right = 338.0
-margin_bottom = 131.0
+margin_bottom = 170.0
 custom_constants/vseparation = 15
 custom_constants/hseparation = 15
 columns = 2
@@ -56,8 +56,8 @@ margin_left = 88.0
 margin_right = 338.0
 margin_bottom = 24.0
 rect_min_size = Vector2( 250, 0 )
-text = "Enter Name"
 align = 1
+placeholder_text = "Enter Name"
 
 [node name="IPLabel" type="Label" parent="CenterContainer/VBoxContainer/GridContainer"]
 margin_top = 44.0
@@ -71,8 +71,8 @@ margin_top = 39.0
 margin_right = 338.0
 margin_bottom = 63.0
 rect_min_size = Vector2( 250, 0 )
-text = "Enter IP Address"
 align = 1
+placeholder_text = "Enter IP Address"
 
 [node name="PortLabel" type="Label" parent="CenterContainer/VBoxContainer/GridContainer"]
 margin_top = 83.0
@@ -86,21 +86,48 @@ margin_top = 78.0
 margin_right = 338.0
 margin_bottom = 102.0
 rect_min_size = Vector2( 250, 0 )
-text = "Enter Port Number"
 align = 1
+placeholder_text = "Enter Port Number"
+
+[node name="LobbyLabel" type="Label" parent="CenterContainer/VBoxContainer/GridContainer"]
+margin_top = 122.0
+margin_right = 73.0
+margin_bottom = 136.0
+text = "Lobby ID:"
+
+[node name="LobbyTextBox" type="LineEdit" parent="CenterContainer/VBoxContainer/GridContainer"]
+margin_left = 88.0
+margin_top = 117.0
+margin_right = 338.0
+margin_bottom = 141.0
+rect_min_size = Vector2( 250, 0 )
+align = 1
+placeholder_text = "Enter Lobby ID"
+
+[node name="createBtn" type="Button" parent="CenterContainer/VBoxContainer"]
+margin_top = 185.0
+margin_right = 338.0
+margin_bottom = 205.0
+text = "Create Game"
 
 [node name="JoinBtn" type="Button" parent="CenterContainer/VBoxContainer"]
-margin_top = 146.0
+margin_top = 220.0
 margin_right = 338.0
-margin_bottom = 166.0
+margin_bottom = 240.0
 text = "Join Game"
 
 [node name="WaitingRoom" parent="." instance=ExtResource( 2 )]
+visible = true
+
+[node name="VBoxContainer" parent="WaitingRoom/CenterContainer" index="0"]
+margin_top = 251.0
+margin_bottom = 468.0
 
 [node name="ItemList" parent="WaitingRoom/CenterContainer/VBoxContainer" index="1"]
 items = [ "Player 1", null, false, "Player 2", null, false, "Player 3", null, false, "Player 4", null, false ]
 
 [connection signal="text_changed" from="CenterContainer/VBoxContainer/GridContainer/NameTextBox" to="." method="_on_NameTextBox_text_changed"]
+[connection signal="pressed" from="CenterContainer/VBoxContainer/createBtn" to="." method="_on_createBtn_pressed"]
 [connection signal="pressed" from="CenterContainer/VBoxContainer/JoinBtn" to="." method="_on_JoinBtn_pressed"]
 [connection signal="pressed" from="WaitingRoom/CenterContainer/VBoxContainer/ReadyBtn" to="." method="_on_ReadyBtn_pressed"]
 
