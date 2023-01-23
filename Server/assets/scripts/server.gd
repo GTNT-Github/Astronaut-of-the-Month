@@ -4,34 +4,67 @@ var network = NetworkedMultiplayerENet.new()
 var port = 3234
 var max_players = 4
 
+var data = {}
 var players = {}
-var ready_players = 0
+
 
 func _ready():
 	start_server()
-	
+
+
 func start_server():
 	network.create_server(port, max_players)
 	get_tree().set_network_peer(network)
-	network.connect("peer_connected", self, "_player_connected")
 	network.connect("peer_disconnected", self, "_player_disconnected")
-	
-	print("Server Started")
-	
-func _player_connected(player_id):
-	print("Player: " + str(player_id) + " Connected")
-	
+
+
 func _player_disconnected(player_id):
-	print("Player: " + str(player_id) + " Disconnected")
+	var player_lobby = players[player_id]
+	data[player_lobby]["players"].erase(player_id)
+
+	if data[player_lobby]["players"].size() == 0:
+		data.erase(player_lobby)
+		return
+
+	update_player_list(player_lobby)
+
+
+remote func send_player_info(lobby_id, id, player_data):
+	if !data.has(lobby_id):
+		create_lobby(lobby_id,id)
+		
+	#Set player data
+	data[lobby_id]["players"][id] = player_data
+	players[id] = lobby_id
 	
-remote func send_player_info(id, player_data):
-	players[id] = player_data
-	rset("players", players)
-	rpc("update_waiting_room")
+	update_player_list(lobby_id)
+
+
+func update_player_list(lobby_id):
+	#Update client player list
+	for i in data[lobby_id]["players"]:
+		rset_id(i,"players", data[lobby_id]["players"])
+		
+	#Update client waiting room
+	for i in data[lobby_id]["players"]:
+		rpc_id(i,"update_waiting_room")
+
+
+remote func load_world(lobby_id):
+	#Update ready players
+	data[lobby_id]["ready_players"] += 1
 	
-remote func load_world():
-	ready_players += 1
-	if players.size() > 1 and ready_players >= players.size():
-		rpc("start_game")
+	#check if all players are ready
+	if data[lobby_id]["players"].size() > 1 and data[lobby_id]["ready_players"] >= data[lobby_id]["players"].size():
+		
+		#Start client worlds
+		for i in data[lobby_id]["players"]:
+			rpc_id(i,"start_game")
+			
+		#Start server world
 		var world = preload("res://assets/scenes/world.tscn").instance()
 		get_tree().get_root().add_child(world)
+
+
+func create_lobby(lobby_id,host_id):
+	data[lobby_id] = {"players":{},"ready_players":0,"host":host_id}
