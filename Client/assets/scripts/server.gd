@@ -28,6 +28,8 @@ func register_player():
 	player_data = Save.save_data
 	players[local_player_id] = player_data
 
+func update_job(old_job):
+	rpc_id(1,"update_job",Server.lobby_id, Server.local_player_id, Server.player_data, old_job)
 
 sync func update_waiting_room():
 	get_tree().call_group("WaitingRoom", "refresh_players", players)
@@ -37,7 +39,7 @@ func load_game():
 	rpc_id(1, "load_world", lobby_id, Server.local_player_id)
 
 
-sync func start_game(lobby_id): 
+sync func start_game(): 
 #	get_tree().call_group("WaitingRoom", "start_countdown", lobby_id)
 	
 #	yield(get_tree().create_timer(4), "timeout")
@@ -45,3 +47,7 @@ sync func start_game(lobby_id):
 	world.name = lobby_id
 	get_tree().get_root().add_child(world)
 	get_tree().get_root().get_node("Lobby").queue_free()
+
+
+remote func update_old_job(old_job):
+	get_tree().call_group("WaitingRoom", "update_old_job", old_job)

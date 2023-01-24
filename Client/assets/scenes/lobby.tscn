@@ -44,17 +44,23 @@ process_material = SubResource( 4 )
 
 [node name="TitleScreen" parent="." instance=ExtResource( 4 )]
 
+[node name="Name" parent="TitleScreen" index="1"]
+anchor_left = 0.5
+anchor_top = 0.235
+anchor_right = 0.5
+anchor_bottom = 0.235
+margin_left = -174.5
+margin_top = -18.8
+margin_right = 174.5
+margin_bottom = 19.2
+text = "WWWWWWWWWWWW"
+
 [node name="WaitingRoom" parent="." instance=ExtResource( 2 )]
 visible = false
-
-[node name="VBoxContainer" parent="WaitingRoom/CenterContainer" index="0"]
-margin_top = 172.0
-margin_bottom = 308.0
 
 [connection signal="text_changed" from="TitleScreen/Name" to="." method="_on_NameTextBox_text_changed"]
 [connection signal="pressed" from="TitleScreen/CreateBtn" to="." method="_on_CreateBtn_pressed"]
 [connection signal="pressed" from="TitleScreen/JoinBtn/EnterArrow" to="." method="_on_JoinBtn_pressed"]
-[connection signal="pressed" from="WaitingRoom/CenterContainer/VBoxContainer/StartBtn" to="." method="_on_StartBtn_pressed"]
 
 [editable path="TitleScreen"]
 [editable path="WaitingRoom"]
