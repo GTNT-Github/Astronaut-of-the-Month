@@ -53,7 +53,6 @@ margin_left = -174.5
 margin_top = -18.8
 margin_right = 174.5
 margin_bottom = 19.2
-text = "WWWWWWWWWWWW"
 
 [node name="WaitingRoom" parent="." instance=ExtResource( 2 )]
 visible = false
