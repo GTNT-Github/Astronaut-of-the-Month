@@ -1,6 +1,6 @@
 extends Node
 
-var network = NetworkedMultiplayerENet.new()
+var network = WebSocketServer.new()
 var port = 3234
 var max_players = 4
 
@@ -14,7 +14,7 @@ func _ready():
 
 
 func start_server():
-	network.create_server(port, max_players)
+	network.listen(port, PoolStringArray(), true)
 	get_tree().set_network_peer(network)
 	network.connect("peer_disconnected", self, "_player_disconnected")
 

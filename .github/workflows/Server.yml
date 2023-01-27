@@ -35,12 +35,12 @@ jobs:
       - name: Upload Mac
         uses: actions/upload-artifact@v2
         with:
-          name: AOTM Server - MacOS
+          name: AOTM Server - Linux
           path: ${{ steps.export.outputs.archive_directory }}/Server_Linux.zip
       - name: Upload Linux
         uses: actions/upload-artifact@v2
         with:
-          name: AOTM Server - Linux
+          name: AOTM Server - MacOS
           path: ${{ steps.export.outputs.archive_directory }}/Server_MacOS.zip
       - name: Upload Web
         uses: actions/upload-artifact@v2

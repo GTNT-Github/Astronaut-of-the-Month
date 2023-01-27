@@ -60,6 +60,7 @@ visible = false
 [connection signal="text_changed" from="TitleScreen/Name" to="." method="_on_NameTextBox_text_changed"]
 [connection signal="pressed" from="TitleScreen/CreateBtn" to="." method="_on_CreateBtn_pressed"]
 [connection signal="pressed" from="TitleScreen/JoinBtn/EnterArrow" to="." method="_on_JoinBtn_pressed"]
+[connection signal="pressed" from="WaitingRoom/VBoxContainer/StartBtn" to="." method="_on_StartBtn_pressed"]
 
 [editable path="TitleScreen"]
 [editable path="WaitingRoom"]

@@ -1,9 +1,11 @@
 extends Node
 
-const DEFAULT_IP = "172.17.0.1"
+const DEFAULT_IP = "159.65.181.60"
+const LOCAL_IP = "127.0.0.1"
 const DEFAULT_PORT = 3234
 
-var network = NetworkedMultiplayerENet.new()
+var network =  WebSocketClient.new()
+var url = "ws://" + str(DEFAULT_IP) + ":" + str(DEFAULT_PORT)
 var local_player_id = 0
 var player_instances = {}
 
@@ -14,7 +16,7 @@ sync var lobby_id = ""
 
 func _connect_to_server():
 	get_tree().connect("connected_to_server", self, "_connected_ok")
-	network.create_client(DEFAULT_IP, DEFAULT_PORT)
+	network.connect_to_url(url, PoolStringArray(), true)
 	get_tree().set_network_peer(network)
 
 
@@ -39,7 +41,7 @@ func load_game():
 	rpc_id(1, "load_world", lobby_id, Server.local_player_id)
 
 
-sync func start_game(): 
+sync func start_game(id): 
 #	get_tree().call_group("WaitingRoom", "start_countdown", lobby_id)
 	
 #	yield(get_tree().create_timer(4), "timeout")
