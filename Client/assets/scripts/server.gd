@@ -1,11 +1,11 @@
 extends Node
 
-const DEFAULT_IP = "159.65.181.60"
-const LOCAL_IP = "127.0.0.1"
+const DEFAULT_IP = "gtntstuff.com"
+const LOCAL_IP = "localhost"
 const DEFAULT_PORT = 3234
 
 var network =  WebSocketClient.new()
-var url = "ws://" + str(DEFAULT_IP) + ":" + str(DEFAULT_PORT)
+var url = "ws://" + str(LOCAL_IP) + ":" + str(DEFAULT_PORT)
 var local_player_id = 0
 var player_instances = {}
 
@@ -15,6 +15,7 @@ sync var lobby_id = ""
 
 
 func _connect_to_server():
+#	network.verify_ssl = false
 	get_tree().connect("connected_to_server", self, "_connected_ok")
 	network.connect_to_url(url, PoolStringArray(), true)
 	get_tree().set_network_peer(network)

@@ -14,6 +14,15 @@ func _ready():
 
 
 func start_server():
+
+#	var crypto = Crypto.new()
+#	var key = crypto.generate_rsa(4096)
+#	var cert = crypto.generate_self_signed_certificate(key, "CN=gtntstuff.com,O=myorganisation,C=IT")
+#	key.save("res://cloudKey.key")
+#	cert.save("res://cloudCert.crt")
+	
+#	network.private_key = load("res://cloudKey.key")
+#	network.ssl_certificate = load("res://cloudCert.crt")
 	network.listen(port, PoolStringArray(), true)
 	get_tree().set_network_peer(network)
 	network.connect("peer_disconnected", self, "_player_disconnected")
