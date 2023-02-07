@@ -6,7 +6,7 @@ var breakers = [1,1,1,1,1]
 
 func _ready() -> void:
 	var tween = Tween.new()
-	tween.interpolate_property(self, "rect_position", Vector2(-640,180),Vector2(320,180),.22,Tween.TRANS_LINEAR,Tween.EASE_IN)
+	tween.interpolate_property(self, "rect_position", Vector2(-640,180),Vector2(320,180),.4,Tween.TRANS_LINEAR,Tween.EASE_IN)
 	add_child(tween)
 	tween.start()
 	play_sound("load_task")
