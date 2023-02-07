@@ -10,11 +10,6 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v3.0.2
-      - name: Wine Installation
-        id: wine_install
-        run: |
-          sudo apt install wine64
-          echo "WINE_PATH=$(which wine64)" >> $GITHUB_OUTPUT
       - name: Build
         id: export
         uses: firebelley/godot-export@master
@@ -25,7 +20,6 @@ jobs:
             relative_export_path: ./my/build/destination # move export output to this directory relative to git root
             archive_output: true
             export_debug: true
-            wine_path: ${{ steps.wine_install.outputs.WINE_PATH }}
             use_godot_4: false
       - name: Upload Windows
         uses: actions/upload-artifact@v2
