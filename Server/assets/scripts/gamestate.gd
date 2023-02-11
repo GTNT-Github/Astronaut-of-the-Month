@@ -13,6 +13,7 @@ remote func spawn_players(lobby_id, id):
 		rpc_id(i,"spawn_player",id)
 	Server.data[lobby_id]["active_game"] = true
 
+
 func remove_player(lobby_id, id, player_name):
 	print(Server.data[lobby_id]["active_game"])
 	if Server.data[lobby_id]["active_game"]:
