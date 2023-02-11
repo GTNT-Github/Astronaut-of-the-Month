@@ -32,6 +32,7 @@ func register_player():
 	players[local_player_id] = player_data
 
 
+#tell server if job changed
 func update_job(old_job):
 	rpc_id(1,"update_job",Server.lobby_id, Server.local_player_id, Server.player_data, old_job)
 
@@ -40,19 +41,18 @@ sync func update_waiting_room():
 	get_tree().call_group("WaitingRoom", "refresh_players", players)
 
 
+#Tell server to load wpr;d
 func load_game():
 	rpc_id(1, "load_world", lobby_id, Server.local_player_id)
 
 
+#Create client world
 sync func start_game(id): 
-#	get_tree().call_group("WaitingRoom", "start_countdown", lobby_id)
-	
-#	yield(get_tree().create_timer(4), "timeout")
 	var world = preload("res://assets/scenes/world.tscn").instance()
 	world.name = lobby_id
 	get_tree().get_root().add_child(world)
 	get_tree().get_root().get_node("Lobby").queue_free()
 
-
+#Clear old job from waiting room
 remote func update_old_job(old_job):
 	get_tree().call_group("WaitingRoom", "update_old_job", old_job)

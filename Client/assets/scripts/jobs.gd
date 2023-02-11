@@ -20,21 +20,27 @@ func play_sound(sound):
 
 
 func _job_entered(body:Node, job: int) -> void:
+	
+	#Check if player is own
 	if body.name == Server.local_player_id:
 		selected_job = job
 
 
 func open_task():
+	#Slide task in
 	var tween = Tween.new()
 	tween.interpolate_property(self, "rect_position", Vector2(-640,180),Vector2(320,180),.4,Tween.TRANS_LINEAR,Tween.EASE_IN)
 	add_child(tween)
 	tween.start()
+	
 	play_sound("load_task")
 
 
 func close_task():
+	#Slide task out
 	var tween = Tween.new()
 	tween.interpolate_property(self, "rect_position", Vector2(320,180),Vector2(-640,180),.4,Tween.TRANS_LINEAR,Tween.EASE_IN)
 	add_child(tween)
 	tween.start()
+	
 	play_sound("task_complete")

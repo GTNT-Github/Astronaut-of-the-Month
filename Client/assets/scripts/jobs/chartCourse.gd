@@ -3,7 +3,7 @@ extends Jobs
 var waypoints = []
 var completed_waypoints = 0
 
-
+#Setup
 func _ready() -> void:
 	generate_waypoints()
 	open_task()
@@ -17,20 +17,25 @@ func generate_waypoints():
 
 
 func _waypoint_entered(new_text: String, input_num:int) -> void:
+	
+	#Get node & uppercase text
 	var input_node = get_node("Waypoints/Input"+str(input_num))
 	new_text = new_text.to_upper()
 	
 	uppercase_text(input_node,new_text)
 	
+	#Check input to actual waypoint
 	if new_text == waypoints[input_num]:
 		input_node.editable = false
 		completed_waypoints += 1
 		
+		#Select next textbox
 		if input_num != 4:
 			get_node("Waypoints/Input"+str(input_num+1)).grab_focus()
 		
 		yield(play_sound("input_waypoint"),"completed")
 		
+		#Finish
 		if completed_waypoints == 5:
 			close_task()
 

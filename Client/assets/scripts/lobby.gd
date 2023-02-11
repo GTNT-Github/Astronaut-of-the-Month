@@ -7,6 +7,7 @@ onready var waiting_room = $WaitingRoom
 
 var job_refrence = ["Electrician","Janitor","Operator","Repairman","Cook"]
 
+
 func _ready() -> void:
 	player_name.text = Save.save_data["Player_name"]
 

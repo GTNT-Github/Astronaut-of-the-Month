@@ -11,20 +11,26 @@ func _ready() -> void:
 
 
 func _physics_process(_delta: float) -> void:
+	#If player is own
 	if is_network_master():
+		
+		#Set position
 		camera.current = true
 		var velocity: Dictionary = getInput()
 		move_and_slide(velocity["velocity"]*speed)
 		
+		#Update server
 		rpc_unreliable_id(1, "update_player", Server.lobby_id, global_transform, velocity["animation"])
 
 
+#Update other players
 remote func update_remote_player(transform,animation):
 	if not is_network_master():
 		global_transform = transform
 		$Sprite.play(animation)
 
 
+#Player moving
 func getInput() -> Dictionary:
 	var animatedSprite = $Sprite
 	var velocity: Vector2 = Vector2.ZERO
