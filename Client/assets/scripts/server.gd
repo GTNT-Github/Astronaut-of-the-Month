@@ -31,8 +31,10 @@ func register_player():
 	player_data = Save.save_data
 	players[local_player_id] = player_data
 
+
 func update_job(old_job):
 	rpc_id(1,"update_job",Server.lobby_id, Server.local_player_id, Server.player_data, old_job)
+
 
 sync func update_waiting_room():
 	get_tree().call_group("WaitingRoom", "refresh_players", players)

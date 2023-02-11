@@ -5,12 +5,8 @@ var breakers = [1,1,1,1,1]
 
 
 func _ready() -> void:
-	var tween = Tween.new()
-	tween.interpolate_property(self, "rect_position", Vector2(-640,180),Vector2(320,180),.4,Tween.TRANS_LINEAR,Tween.EASE_IN)
-	add_child(tween)
-	tween.start()
-	play_sound("load_task")
 	randomize_breakers()
+	open_task()
 
 
 func randomize_breakers():
@@ -31,8 +27,4 @@ func breaker_flipped(breaker_num: int) -> void:
 		get_node("Breakers/Breaker"+str(breaker_num)).modulate = Color("2cff00")
 		flipped_breakers += 1
 		if flipped_breakers == 5:
-			play_sound("task_complete")
-			var tween = Tween.new()
-			tween.interpolate_property(self, "rect_position", Vector2(320,180),Vector2(-640,180),.4,Tween.TRANS_LINEAR,Tween.EASE_IN)
-			add_child(tween)
-			tween.start()
+			close_task()
