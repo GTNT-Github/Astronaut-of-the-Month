@@ -7,15 +7,19 @@ var sounds = {
 	"flip_breaker": preload("res://assets/sounds/flip_breaker.wav"),
 	"load_task": preload("res://assets/sounds/load_task.wav"),
 	"task_complete": preload("res://assets/sounds/task_complete.wav"),
-	"input_waypoint": preload("res://assets/sounds/input_waypoint.wav")
+	"input_waypoint": preload("res://assets/sounds/input_waypoint.wav"),
 }
 
 
-func play_sound(sound):
+func play_sound(sound,pitch = null):
 	var soundNode = AudioStreamPlayer.new()
 	soundNode.stream = sounds[sound]
 	add_child(soundNode)
 	soundNode.play()
+	
+	if pitch != null:
+		soundNode.pitch_scale = pitch
+	
 	yield(soundNode,"finished")
 
 

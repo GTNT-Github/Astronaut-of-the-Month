@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/scripts/jobs/chartCourse.gd" type="Script" id=1]
 [ext_resource path="res://assets/fonts/defaultFont.ttf" type="DynamicFontData" id=2]
@@ -14,12 +14,6 @@ corner_radius_bottom_left = 40
 size = 20
 use_filter = true
 font_data = ExtResource( 2 )
-
-[sub_resource type="DynamicFont" id=3]
-font_data = ExtResource( 2 )
-
-[sub_resource type="StyleBoxFlat" id=4]
-bg_color = Color( 0.0392157, 0.662745, 0, 1 )
 
 [node name="chartCourse" type="Panel"]
 anchor_right = 1.0
@@ -39,127 +33,3 @@ custom_fonts/font = SubResource( 2 )
 text = "Input Waypoints"
 align = 1
 valign = 1
-
-[node name="Waypoints" type="GridContainer" parent="."]
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-margin_left = -201.5
-margin_top = -95.0
-margin_right = 201.5
-margin_bottom = 95.0
-custom_constants/vseparation = 15
-custom_constants/hseparation = 100
-columns = 2
-
-[node name="Input0" type="LineEdit" parent="Waypoints"]
-margin_right = 202.0
-margin_bottom = 26.0
-size_flags_horizontal = 3
-custom_colors/font_color_uneditable = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 3 )
-custom_styles/read_only = SubResource( 4 )
-align = 1
-max_length = 5
-placeholder_text = "Waypoint #1"
-caret_blink = true
-
-[node name="Waypoint0" type="Label" parent="Waypoints"]
-margin_left = 302.0
-margin_top = 5.0
-margin_right = 403.0
-margin_bottom = 21.0
-rect_min_size = Vector2( 101, 0 )
-custom_fonts/font = SubResource( 3 )
-text = "WWWWW"
-
-[node name="Input1" type="LineEdit" parent="Waypoints"]
-margin_top = 41.0
-margin_right = 202.0
-margin_bottom = 67.0
-size_flags_horizontal = 3
-custom_colors/font_color_uneditable = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 3 )
-custom_styles/read_only = SubResource( 4 )
-align = 1
-max_length = 5
-placeholder_text = "Waypoint #2"
-
-[node name="Waypoint1" type="Label" parent="Waypoints"]
-margin_left = 302.0
-margin_top = 46.0
-margin_right = 403.0
-margin_bottom = 62.0
-rect_min_size = Vector2( 101, 0 )
-custom_fonts/font = SubResource( 3 )
-text = "WWWWW"
-
-[node name="Input2" type="LineEdit" parent="Waypoints"]
-margin_top = 82.0
-margin_right = 202.0
-margin_bottom = 108.0
-size_flags_horizontal = 3
-custom_colors/font_color_uneditable = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 3 )
-custom_styles/read_only = SubResource( 4 )
-align = 1
-max_length = 5
-placeholder_text = "Waypoint #3"
-
-[node name="Waypoint2" type="Label" parent="Waypoints"]
-margin_left = 302.0
-margin_top = 87.0
-margin_right = 403.0
-margin_bottom = 103.0
-rect_min_size = Vector2( 101, 0 )
-custom_fonts/font = SubResource( 3 )
-text = "WWWWW"
-
-[node name="Input3" type="LineEdit" parent="Waypoints"]
-margin_top = 123.0
-margin_right = 202.0
-margin_bottom = 149.0
-size_flags_horizontal = 3
-custom_colors/font_color_uneditable = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 3 )
-custom_styles/read_only = SubResource( 4 )
-align = 1
-max_length = 5
-placeholder_text = "Waypoint #4"
-
-[node name="Waypoint3" type="Label" parent="Waypoints"]
-margin_left = 302.0
-margin_top = 128.0
-margin_right = 403.0
-margin_bottom = 144.0
-rect_min_size = Vector2( 101, 0 )
-custom_fonts/font = SubResource( 3 )
-text = "WWWWW"
-
-[node name="Input4" type="LineEdit" parent="Waypoints"]
-margin_top = 164.0
-margin_right = 202.0
-margin_bottom = 190.0
-size_flags_horizontal = 3
-custom_colors/font_color_uneditable = Color( 0, 0, 0, 1 )
-custom_fonts/font = SubResource( 3 )
-custom_styles/read_only = SubResource( 4 )
-align = 1
-max_length = 5
-placeholder_text = "Waypoint #5"
-
-[node name="Waypoint4" type="Label" parent="Waypoints"]
-margin_left = 302.0
-margin_top = 169.0
-margin_right = 403.0
-margin_bottom = 185.0
-rect_min_size = Vector2( 101, 0 )
-custom_fonts/font = SubResource( 3 )
-text = "WWWWW"
-
-[connection signal="text_changed" from="Waypoints/Input0" to="." method="_waypoint_entered" binds= [ 0 ]]
-[connection signal="text_changed" from="Waypoints/Input1" to="." method="_waypoint_entered" binds= [ 1 ]]
-[connection signal="text_changed" from="Waypoints/Input2" to="." method="_waypoint_entered" binds= [ 2 ]]
-[connection signal="text_changed" from="Waypoints/Input3" to="." method="_waypoint_entered" binds= [ 3 ]]
-[connection signal="text_changed" from="Waypoints/Input4" to="." method="_waypoint_entered" binds= [ 4 ]]
