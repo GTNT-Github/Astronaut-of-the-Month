@@ -1,0 +1,103 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://assets/scripts/jobs/temperature.gd" type="Script" id=1]
+[ext_resource path="res://assets/fonts/defaultFont.ttf" type="DynamicFontData" id=2]
+
+[sub_resource type="StyleBoxFlat" id=1]
+bg_color = Color( 0, 0, 0, 0.427451 )
+corner_radius_top_left = 40
+corner_radius_top_right = 40
+corner_radius_bottom_right = 40
+corner_radius_bottom_left = 40
+
+[sub_resource type="DynamicFont" id=3]
+size = 20
+use_filter = true
+font_data = ExtResource( 2 )
+
+[sub_resource type="DynamicFont" id=4]
+size = 40
+use_filter = true
+font_data = ExtResource( 2 )
+
+[node name="engineTrim" type="Panel"]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -320.0
+margin_top = -180.0
+margin_right = 320.0
+margin_bottom = 180.0
+custom_styles/panel = SubResource( 1 )
+script = ExtResource( 1 )
+
+[node name="Label" type="Label" parent="."]
+anchor_right = 1.0
+margin_top = 16.0
+margin_bottom = 56.0
+custom_fonts/font = SubResource( 3 )
+text = "Set Temperature"
+align = 1
+valign = 1
+
+[node name="Inputs" type="VBoxContainer" parent="."]
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -100.0
+margin_top = -99.0
+margin_right = 100.0
+margin_bottom = 147.0
+custom_constants/separation = 20
+
+[node name="Target" type="Label" parent="Inputs"]
+margin_right = 200.0
+margin_bottom = 40.0
+custom_colors/font_color = Color( 0, 1, 0, 1 )
+custom_fonts/font = SubResource( 4 )
+text = "°"
+align = 1
+valign = 1
+
+[node name="Up" type="Button" parent="Inputs"]
+margin_top = 60.0
+margin_right = 200.0
+margin_bottom = 113.0
+size_flags_vertical = 3
+
+[node name="↑" type="Label" parent="Inputs/Up"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 4 )
+text = "↑"
+align = 1
+valign = 1
+
+[node name="Temp" type="Label" parent="Inputs"]
+margin_top = 133.0
+margin_right = 200.0
+margin_bottom = 173.0
+rect_min_size = Vector2( 200, 0 )
+custom_colors/font_color = Color( 1, 0, 0, 1 )
+custom_fonts/font = SubResource( 4 )
+text = "°"
+align = 1
+
+[node name="Down" type="Button" parent="Inputs"]
+margin_top = 193.0
+margin_right = 200.0
+margin_bottom = 246.0
+size_flags_vertical = 3
+
+[node name="↓" type="Label" parent="Inputs/Down"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_fonts/font = SubResource( 4 )
+text = "↓"
+align = 1
+valign = 1
+
+[connection signal="pressed" from="Inputs/Up" to="." method="_increase_temp"]
+[connection signal="pressed" from="Inputs/Down" to="." method="_decrease_temp"]

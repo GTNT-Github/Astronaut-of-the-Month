@@ -11,14 +11,11 @@ var sounds = {
 }
 
 
-func play_sound(sound,pitch = null):
+func play_sound(sound):
 	var soundNode = AudioStreamPlayer.new()
 	soundNode.stream = sounds[sound]
 	add_child(soundNode)
 	soundNode.play()
-	
-	if pitch != null:
-		soundNode.pitch_scale = pitch
 	
 	yield(soundNode,"finished")
 

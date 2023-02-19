@@ -25,12 +25,14 @@ use_filter = true
 font_data = ExtResource( 5 )
 
 [node name="engineTrim" type="Panel"]
-anchor_right = 1.0
-anchor_bottom = 1.0
-margin_left = 274.0
-margin_top = 68.0
-margin_right = -366.0
-margin_bottom = -292.0
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+margin_left = -320.0
+margin_top = -180.0
+margin_right = 320.0
+margin_bottom = 180.0
 custom_styles/panel = SubResource( 1 )
 script = ExtResource( 6 )
 
@@ -119,18 +121,29 @@ margin_right = 16.0
 margin_bottom = 64.0
 texture = ExtResource( 3 )
 
-[node name="Label2" type="Label" parent="."]
+[node name="Eng1V2" type="Label" parent="."]
+anchor_right = 1.0
+margin_left = 27.0
+margin_top = 166.0
+margin_right = -453.0
+margin_bottom = 176.0
+custom_fonts/font = SubResource( 2 )
+text = "Eng 1 Horizontal"
+align = 1
+valign = 1
+
+[node name="Eng1V" type="Label" parent="."]
 anchor_right = 1.0
 margin_left = 170.0
 margin_top = 62.0
 margin_right = -330.0
 margin_bottom = 72.0
 custom_fonts/font = SubResource( 2 )
-text = "Eng 2 Vertical"
+text = "Eng 1 Vertical"
 align = 2
 valign = 1
 
-[node name="Label3" type="Label" parent="."]
+[node name="Eng2V" type="Label" parent="."]
 anchor_right = 1.0
 margin_left = 330.0
 margin_top = 62.0
@@ -138,6 +151,17 @@ margin_right = -200.0
 margin_bottom = 72.0
 custom_fonts/font = SubResource( 2 )
 text = "Eng 2 Vertical"
+valign = 1
+
+[node name="Eng1V3" type="Label" parent="."]
+anchor_right = 1.0
+margin_left = 460.0
+margin_top = 166.0
+margin_right = -20.0
+margin_bottom = 176.0
+custom_fonts/font = SubResource( 2 )
+text = "Eng 2 Horizontal"
+align = 1
 valign = 1
 
 [connection signal="drag_ended" from="Sliders/Engine0" to="." method="_value_set" binds= [ 0 ]]
