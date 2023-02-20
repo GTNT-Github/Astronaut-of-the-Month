@@ -8,7 +8,7 @@ var data = {}
 var players = {}
 var job_refrence = ["Electrician","Janitor","Operator","Repairman","Cook"]
 var job_assignements = {
-	0:[0,2,3],
+	0:[0],
 	1:[1],
 	2:[2],
 	3:[3],
