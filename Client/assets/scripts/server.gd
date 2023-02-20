@@ -5,7 +5,7 @@ const LOCAL_IP = "localhost"
 const DEFAULT_PORT = 3234
 
 var network =  WebSocketClient.new()
-var url = "ws://" + str(LOCAL_IP) + ":" + str(DEFAULT_PORT)
+var url = "ws://" + str(DEFAULT_IP) + ":" + str(DEFAULT_PORT)
 var local_player_id = 0
 var player_instances = {}
 
@@ -24,12 +24,15 @@ sync var lobby_id = ""
 
 func _connect_to_server():
 #	network.verify_ssl = false
+	print(1)
 	get_tree().connect("connected_to_server", self, "_connected_ok")
 	network.connect_to_url(url, PoolStringArray(), true)
 	get_tree().set_network_peer(network)
+	print(2)
 
 
 func _connected_ok():
+	print(3)
 	register_player()
 	rpc_id(1, "send_player_info", lobby_id, local_player_id, player_data)
 
