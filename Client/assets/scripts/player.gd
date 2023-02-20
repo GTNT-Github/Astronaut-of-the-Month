@@ -12,7 +12,7 @@ func _ready() -> void:
 
 func _physics_process(_delta: float) -> void:
 	#If player is own
-	if is_network_master():
+	if is_network_master() && !get_parent().get_parent().open_job:
 		
 		#Set position
 		camera.current = true

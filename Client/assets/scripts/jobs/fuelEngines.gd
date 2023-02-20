@@ -18,7 +18,6 @@ func _button_down(eng: int) -> void:
 
 func _process(delta: float) -> void:
 	if pressed == 1 && eng1 <= 1:
-		print("ENG: ",eng1)
 		eng1 += .004
 		$GridContainer/Eng1/Fuel.rect_scale.y = eng1
 		checkFull(eng1)

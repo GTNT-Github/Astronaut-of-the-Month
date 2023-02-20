@@ -6,7 +6,7 @@ onready var player_spawn = $PlayerSpawn
 onready var players = $Players
 
 var active_game = false
-
+var open_job
 
 var job_assignements = {
 	0:"Electrician Job",
@@ -18,6 +18,7 @@ var job_assignements = {
 
 func _ready() -> void:
 	
+#	$Jobs.load_scenes()
 	#Ask server to spawn players
 	rpc_id(1, "spawn_players", Server.lobby_id, Server.local_player_id)
 	
@@ -72,5 +73,3 @@ func announce(announcement):
 	announcement_label.queue_free()
 	timer.queue_free()
 	tween.queue_free()
-
-

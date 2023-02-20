@@ -9,6 +9,14 @@ var url = "ws://" + str(LOCAL_IP) + ":" + str(DEFAULT_PORT)
 var local_player_id = 0
 var player_instances = {}
 
+var jobs = [
+	preload("res://assets/scenes/jobs/circuitBreakers.tscn"),
+	preload("res://assets/scenes/jobs/temperature.tscn"),
+	preload("res://assets/scenes/jobs/engineTrim.tscn"),
+	preload("res://assets/scenes/jobs/fuelEngines.tscn"),
+	preload("res://assets/scenes/jobs/chartCourse.tscn"),
+]
+
 sync var players = {}
 sync var player_data = {}
 sync var lobby_id = ""
