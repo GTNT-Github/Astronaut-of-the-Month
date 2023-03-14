@@ -6,6 +6,9 @@ var eng2 = 0
 var pressed = 0
 var full = 0
 
+var index = 3
+
+
 func _ready() -> void:
 	open_task()
 

@@ -3,6 +3,9 @@ extends Jobs
 var slider_values = ["H","V","V","H"]
 var slider_goals = []
 var completed_trims = 0
+var index = 2
+
+
 func _ready() -> void:
 	set_trim()
 	open_task()

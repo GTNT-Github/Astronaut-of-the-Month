@@ -10,14 +10,14 @@ func _ready() -> void:
 	set_player_name()
 
 
-func _physics_process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	#If player is own
 	if is_network_master() && !get_parent().get_parent().open_job:
 		
 		#Set position
-		camera.current = true
+		$Camera.current = true
 		var velocity: Dictionary = getInput()
-		move_and_slide(velocity["velocity"]*speed)
+		move_and_slide((velocity["velocity"]*speed).floor())
 		
 		#Update server
 		rpc_unreliable_id(1, "update_player", Server.lobby_id, global_transform, velocity["animation"])

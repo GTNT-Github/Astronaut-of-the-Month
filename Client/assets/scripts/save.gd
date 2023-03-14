@@ -16,7 +16,7 @@ func get_data():
 	
 	#Save file doesn't exist - create data
 	if not file.file_exists(SAVEGAME):
-		save_data = {"Player_name": "Unnamed","Job":0}
+		save_data = {"Player_name": "Unnamed","Role":0}
 		save_game()
 		
 	#Get save data

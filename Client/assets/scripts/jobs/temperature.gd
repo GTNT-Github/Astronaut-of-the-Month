@@ -2,6 +2,7 @@ extends Jobs
 
 var target
 var temp
+var index = 1
 
 func _ready() -> void:
 	set_tempature()
@@ -12,11 +13,9 @@ func set_tempature():
 	var rng = RandomNumberGenerator.new()
 	rng.seed = OS.get_system_time_msecs()
 	
-	print(temp)
 	temp = rng.randi_range(50,80)
 	$Inputs/Temp.text = str(temp)+"°"
 	
-	print(temp)
 	target = rng.randi_range(50,80)
 	target = rng.randi_range(50,80) if temp == target else target
 	$Inputs/Target.text = str(target)+"°"

@@ -2,7 +2,7 @@ extends Jobs
 
 var flipped_breakers = 5
 var breakers = [1,1,1,1,1]
-
+var index = 0
 
 func _ready() -> void:
 	randomize_breakers()

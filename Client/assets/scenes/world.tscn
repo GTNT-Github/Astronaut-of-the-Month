@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=2]
+[gd_scene load_steps=15 format=2]
 
 [ext_resource path="res://assets/tilesets/temp.png" type="Texture" id=1]
 [ext_resource path="res://assets/scripts/gamestate.gd" type="Script" id=2]
@@ -9,6 +9,7 @@
 [ext_resource path="res://assets/scripts/jobs.gd" type="Script" id=7]
 [ext_resource path="res://assets/scenes/jobs.tscn" type="PackedScene" id=8]
 [ext_resource path="res://assets/ui/waitingRoom/cook.png" type="Texture" id=9]
+[ext_resource path="res://assets/fonts/defaultFont.ttf" type="DynamicFontData" id=10]
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 128, 128, 0, 128, 0, 0, 128, 0 )
@@ -68,6 +69,10 @@ points = PoolVector2Array( 128, 128, 0, 128, 0, 0, 128, 0 )
 bg_color = Color( 0.0588235, 0.0588235, 0.0588235, 0.435294 )
 corner_radius_bottom_right = 40
 
+[sub_resource type="DynamicFont" id=5]
+size = 25
+font_data = ExtResource( 10 )
+
 [node name="World" type="Node2D"]
 script = ExtResource( 2 )
 
@@ -109,6 +114,19 @@ custom_constants/separation = 20
 [node name="Camera2D" type="Camera2D" parent="UI"]
 position = Vector2( 640, 360 )
 
+[node name="Sabotage" type="Button" parent="UI"]
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = -56.0
+margin_top = -56.0
+margin_right = -16.0
+margin_bottom = -16.0
+custom_fonts/font = SubResource( 5 )
+disabled = true
+text = "S"
+
 [node name="Jobs" type="Node" parent="."]
 script = ExtResource( 7 )
 
@@ -139,17 +157,22 @@ texture = ExtResource( 6 )
 collision_layer = 8
 
 [node name="Cook" parent="Jobs" instance=ExtResource( 8 )]
-position = Vector2( 0, 0 )
+position = Vector2( -222, 0 )
 texture = ExtResource( 9 )
 
 [node name="Collision" parent="Jobs/Cook" index="0"]
 collision_layer = 8
 
 [connection signal="area_entered" from="Jobs/Electrician/Collision" to="Jobs" method="_job_entered" binds= [ 0 ]]
+[connection signal="area_exited" from="Jobs/Electrician/Collision" to="Jobs" method="_job_exited" binds= [ 0 ]]
 [connection signal="area_entered" from="Jobs/Janitor/Collision" to="Jobs" method="_job_entered" binds= [ 1 ]]
+[connection signal="area_exited" from="Jobs/Janitor/Collision" to="Jobs" method="_job_exited" binds= [ 1 ]]
 [connection signal="area_entered" from="Jobs/Operator/Collision" to="Jobs" method="_job_entered" binds= [ 2 ]]
+[connection signal="area_exited" from="Jobs/Operator/Collision" to="Jobs" method="_job_exited" binds= [ 2 ]]
 [connection signal="area_entered" from="Jobs/Repairman/Collision" to="Jobs" method="_job_entered" binds= [ 3 ]]
+[connection signal="area_exited" from="Jobs/Repairman/Collision" to="Jobs" method="_job_exited" binds= [ 3 ]]
 [connection signal="area_entered" from="Jobs/Cook/Collision" to="Jobs" method="_job_entered" binds= [ 4 ]]
+[connection signal="area_exited" from="Jobs/Cook/Collision" to="Jobs" method="_job_exited" binds= [ 4 ]]
 
 [editable path="Jobs/Electrician"]
 [editable path="Jobs/Janitor"]

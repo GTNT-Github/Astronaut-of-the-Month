@@ -2,6 +2,8 @@ extends Jobs
 
 var waypoints = []
 var completed_waypoints = 0
+var index = 4
+
 
 #Setup
 func _ready() -> void:
