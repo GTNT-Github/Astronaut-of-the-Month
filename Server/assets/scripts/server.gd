@@ -54,12 +54,12 @@ remote func send_player_info(lobby_id, id, player_data):
 	var free_jobs = data[lobby_id]["free_jobs"]
 	
 	#Select next available job
-	if !free_jobs.has(player_data["Job"]):
+	if !free_jobs.has(player_data["Role"]):
 		var next_job = free_jobs.keys()[0]
-		player_data["Job"] = next_job
+		player_data["Role"] = next_job
 		
 	#Set unavailable jobs
-	data[lobby_id]["free_jobs"].erase(player_data["Job"])
+	data[lobby_id]["free_jobs"].erase(player_data["Role"])
 	rset_id(id, "player_data", player_data)
 	
 	#Set player data
@@ -92,7 +92,7 @@ remote func load_world(lobby_id, id):
 		#Start client worlds
 		for i in data[lobby_id]["players"]:
 			var player_data = data[lobby_id]["players"][i]
-			player_data["jobs"] = job_assignements[player_data["Job"]]
+			player_data["Jobs"] = job_assignements[player_data["Role"]]
 			rset_id(i,"player_data",data[lobby_id]["players"][i])
 			
 			rpc_id(i,"start_game", lobby_id)
@@ -105,11 +105,11 @@ remote func load_world(lobby_id, id):
 
 
 func create_lobby(lobby_id,host_id):
-	data[lobby_id] = {"players":{},"host":host_id,"active_game":false,"free_jobs":{0:"Electrician",1:"Janitor",2:"Operator",3:"Repairman",4:"Cook"}}
+	data[lobby_id] = {"players":{},"host":host_id,"active_game":false,"free_jobs":{0:"Electrician",1:"Janitor",2:"Operator",3:"Repairman",4:"Cook"},"completed_jobs":[]}
 
 
 remote func update_job(lobby_id, player_id, player_data, old_job):
 	data[lobby_id]["players"][player_id] = player_data
-	data[lobby_id]["free_jobs"].erase(player_data["Job"])
+	data[lobby_id]["free_jobs"].erase(player_data["Role"])
 	data[lobby_id]["free_jobs"][old_job] = job_refrence[old_job]
 	update_player_list(lobby_id, old_job)
