@@ -1,20 +1,27 @@
 extends Node2D
 
-const PLAYER = preload("res://assets/scenes/player.tscn")
+const JOBS = [preload("res://assets/scenes/players/electrician.tscn"),
+			  preload("res://assets/scenes/players/janitor.tscn"),
+			  preload("res://assets/scenes/players/operator.tscn")]
 
 onready var player_spawn = $PlayerSpawn
 onready var players = $Players
 
 var active_game = false
 var open_job
+	
 sync var data = {}
 
 var job_assignements = {
-	0:"Electrician Job",
-	1:"Janitor Job",
-	2:"Operator Job",
-	3:"Repairman Job",
-	4:"Cook Job"}
+	0:"Chart course",
+	1:"Circuit breakers",
+	2:"Clean windows",
+	3:"Engine trim",
+	4:"Flashlight",
+	5:"Fuel engines",
+	6:"Mop the floor",
+	7:"Set temperature",
+	8:"Replace toilet paper"}
 
 func _ready() -> void:
 	
@@ -31,8 +38,9 @@ func _ready() -> void:
 		$UI/jobs.add_child(job_label)
 
 
-remote func spawn_player(id):
-	var player = PLAYER.instance()
+remote func spawn_player(id,job):
+	print(job)
+	var player = JOBS[job].instance()
 	player.name = str(id)
 	players.add_child(player)
 	player.set_network_master(id)
@@ -78,3 +86,10 @@ func announce(announcement):
 
 func complete_job(job):
 	rpc_id(1, "complete_job", Server.lobby_id, job)
+
+
+func _sabotage() -> void:
+	print(1)
+	var job = $Jobs.sabotage_job
+	rpc_id(1, "sabotage_job", Server.lobby_id, job)
+	print(2)

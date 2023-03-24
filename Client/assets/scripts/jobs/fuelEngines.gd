@@ -6,7 +6,7 @@ var eng2 = 0
 var pressed = 0
 var full = 0
 
-var index = 3
+var index = 5
 
 
 func _ready() -> void:
@@ -22,11 +22,11 @@ func _button_down(eng: int) -> void:
 func _process(delta: float) -> void:
 	if pressed == 1 && eng1 <= 1:
 		eng1 += .004
-		$GridContainer/Eng1/Fuel.rect_scale.y = eng1
+		$Fuel1.rect_scale.y = eng1
 		checkFull(eng1)
 	elif pressed == 2 && eng2 <= 1:
 		eng2 += .004
-		$GridContainer/Eng2/Fuel.rect_scale.y = eng2
+		$Fuel2.rect_scale.y = eng2
 		checkFull(eng2)
 
 func checkFull(eng):

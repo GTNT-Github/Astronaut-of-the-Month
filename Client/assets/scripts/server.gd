@@ -5,16 +5,20 @@ const LOCAL_IP = "localhost"
 const DEFAULT_PORT = 3234
 
 var network =  WebSocketClient.new()
-var url = "ws://" + str(LOCAL_IP) + ":" + str(DEFAULT_PORT)
+var url = "ws://" + str(DEFAULT_IP) + ":" + str(DEFAULT_PORT)
 var local_player_id = 0
 var player_instances = {}
 
 var jobs = [
-	preload("res://assets/scenes/jobs/circuitBreakers.tscn"),
-	preload("res://assets/scenes/jobs/temperature.tscn"),
-	preload("res://assets/scenes/jobs/engineTrim.tscn"),
-	preload("res://assets/scenes/jobs/fuelEngines.tscn"),
 	preload("res://assets/scenes/jobs/chartCourse.tscn"),
+	preload("res://assets/scenes/jobs/circuitBreakers.tscn"),
+	preload("res://assets/scenes/jobs/cleanWindows.tscn"),
+	preload("res://assets/scenes/jobs/engineTrim.tscn"),
+	preload("res://assets/scenes/jobs/flashlight.tscn"),
+	preload("res://assets/scenes/jobs/fuelEngines.tscn"),
+	preload("res://assets/scenes/jobs/mopFloor.tscn"),
+	preload("res://assets/scenes/jobs/temperature.tscn"),
+	preload("res://assets/scenes/jobs/toiletPaper.tscn"),
 ]
 
 sync var players = {}

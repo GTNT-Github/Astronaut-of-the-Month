@@ -5,7 +5,7 @@ onready var selected_lobby = $TitleScreen/JoinBtn/LobbyLabel
 onready var lobby = $TitleScreen
 onready var waiting_room = $WaitingRoom
 
-var job_refrence = ["Electrician","Janitor","Operator","Repairman","Cook"]
+var job_refrence = ["Electrician","Janitor","Operator"]
 
 
 func _ready() -> void:

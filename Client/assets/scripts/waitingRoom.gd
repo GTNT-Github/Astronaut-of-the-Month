@@ -3,7 +3,7 @@ extends TextureRect
 onready var item_list = $VBoxContainer/ItemList
 onready var id_label = $VBoxContainer/ID
 
-var job_refrence = ["Electrician","Janitor","Operator","Repairman","Cook"]
+var job_refrence = ["Electrician","Janitor","Operator"]
 
 
 func refresh_players(players):
