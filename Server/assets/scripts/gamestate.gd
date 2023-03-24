@@ -10,7 +10,7 @@ remote func spawn_players(lobby_id, id):
 	player.name = str(id)
 	players.add_child(player)
 	for i in Server.data[lobby_id]["players"]:
-		rpc_id(i,"spawn_player",id)
+		rpc_id(i,"spawn_player",id,Server.data[lobby_id]["players"][id]["Role"])
 	Server.data[lobby_id]["active_game"] = true
 	set_data(lobby_id)
 
@@ -30,3 +30,10 @@ remote func complete_job(lobby_id, job):
 func set_data(lobby_id):
 	for i in Server.data[lobby_id]["players"]:
 		rset_id(i,"data",Server.data)
+
+remote func sabotage_job(lobby_id, job):
+	for id in Server.data[lobby_id]["players"]:
+		var player_data = Server.data[lobby_id]["players"][id]
+		if player_data["StartingJobs"].has(job):
+			rpc_id(id, "job_sabotaged/")
+			print(1, player_data["Player_name"])

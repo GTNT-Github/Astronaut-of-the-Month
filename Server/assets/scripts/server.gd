@@ -6,13 +6,11 @@ var max_players = 4
 
 var data = {}
 var players = {}
-var job_refrence = ["Electrician","Janitor","Operator","Repairman","Cook"]
+var job_refrence = ["Electrician","Janitor","Operator"]
 var job_assignements = {
-	0:[0],
-	1:[1],
-	2:[2],
-	3:[3],
-	4:[4]}
+	0:[1,4,7],
+	1:[2,6,8],
+	2:[0,3,5]}
 
 
 func _ready():
@@ -93,6 +91,7 @@ remote func load_world(lobby_id, id):
 		for i in data[lobby_id]["players"]:
 			var player_data = data[lobby_id]["players"][i]
 			player_data["Jobs"] = job_assignements[player_data["Role"]]
+			player_data["StartingJobs"] = job_assignements[player_data["Role"]]
 			rset_id(i,"player_data",data[lobby_id]["players"][i])
 			
 			rpc_id(i,"start_game", lobby_id)
