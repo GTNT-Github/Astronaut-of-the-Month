@@ -5,7 +5,7 @@ const LOCAL_IP = "localhost"
 const DEFAULT_PORT = 3234
 
 var network =  WebSocketClient.new()
-var url = "ws://" + str(DEFAULT_IP) + ":" + str(DEFAULT_PORT)
+var url = "wss://" + str(DEFAULT_IP) + ":" + str(DEFAULT_PORT)
 var local_player_id = 0
 var player_instances = {}
 

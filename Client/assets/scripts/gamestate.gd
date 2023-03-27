@@ -25,7 +25,6 @@ var job_assignements = {
 
 func _ready() -> void:
 	
-#	$Jobs.load_scenes()
 	#Ask server to spawn players
 	rpc_id(1, "spawn_players", Server.lobby_id, Server.local_player_id)
 	
@@ -39,7 +38,6 @@ func _ready() -> void:
 
 
 remote func spawn_player(id,job):
-	print(job)
 	var player = JOBS[job].instance()
 	player.name = str(id)
 	players.add_child(player)
